@@ -79,6 +79,7 @@
 
                     <ul>
                         <li><a href="{{route('category.index')}}">Category</a></li>
+                        <li><a href="{{route('product.index')}}">Products</a></li>
                     </ul>
 
                   </div>

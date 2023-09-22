@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ShopController;
@@ -36,6 +37,7 @@ Auth::routes();
 
 Route::get('admin', [DashboardController::class, 'index'])->middleware(['auth', 'admin']);
 Route::resource('admin/category', CategoryController::class);
+Route::resource('admin/product', ProductController::class);
 
 
 
