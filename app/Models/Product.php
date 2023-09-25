@@ -13,7 +13,7 @@ class Product extends Model
 
     protected $with = ['category'];
 
-    protected $fillable = ['name', 'description', 'price', 'category_id'];
+    protected $fillable = ['name', 'description', 'price', 'category_id', 'image'];
 
     public function sluggable(): array
     {

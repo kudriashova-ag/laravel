@@ -14,6 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+   
         // $products = Product::with('category')->paginate(10);
         $products = Product::paginate(10);
         return view('admin.product.index', compact('products'));
@@ -37,15 +38,18 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
-            'image' => 'image'
+            // 'image' => 'image'
         ]);
 
         $product = Product::create($request->all());
 
         // загрузить изображение, если есть
-        // $product->image = $path;
-        // $product->save();
-        
+        // if ($request->image) {
+        //     $path = $request->file('image')->store('uploads');
+        //     $product->image = $path;
+        //     $product->save();
+        // }
+
         return redirect()->route('product.index');
     }
 

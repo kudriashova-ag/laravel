@@ -41,6 +41,10 @@ Route::resource('admin/product', ProductController::class);
 
 
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+  \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 
 /* 
 Controller
