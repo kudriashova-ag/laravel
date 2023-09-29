@@ -30,14 +30,27 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Catalog</a>
+                            <ul class="dropdown-menu">
+                                @foreach ($shared_categories as $item)
+                                    <li><a href="{{url('category/'. $item->slug)}}" class="dropdown-item">{{$item->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{url('contacts')}}" class="nav-link">Contacts</a>
                         </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">Cart</button>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -80,5 +93,25 @@
             </div>
         </main>
     </div>
+
+
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Your Cart</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @include('shop.cart')
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
