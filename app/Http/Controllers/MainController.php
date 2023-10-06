@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Samir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class MainController extends Controller
 {
-    function index(): View {
+    function index(): View
+    {
+
         $title = 'Main Page';
+
+        // Mail::to('kudriashova.ag@gmail.com')->send(new TestMail($title));
+
         $latestProducts = Product::orderBy('created_at', 'desc')->limit(4)->get();
 
         //$products = Product::where('category_id', '=', 1)->orWhere('category_id', '=', 5)->get();
@@ -37,7 +45,7 @@ class MainController extends Controller
         $name = $request->name;
         $email = $request->email;
         $message = $request->message;
-        
+
         //dd($request->all());
 
         // send mail
@@ -45,4 +53,14 @@ class MainController extends Controller
         return redirect('/contacts')->with('success', 'Thank!');
     }
 
+
+    function search(Request $request)
+    {
+        $s = $request->s;
+        $products = Product::where('name', 'LIKE', "%$s%")->get();
+        
+        dd($products);
+
+        return view('search', compact('products'));
+    }
 }

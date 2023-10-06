@@ -13,6 +13,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Category</th>
+        <th>Tags</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -26,7 +27,12 @@
 
             <td>{{$product->name}}</td>
             <td>{{$product->price}}</td>
-            <td>{{$product->category->name}}</td>
+            <td>{{$product->category_name}}</td>
+            <td>
+              @foreach($product->tags as $tag)
+                {{$tag->name}} <br>
+              @endforeach
+            </td>
             <td>
               <a href="{{route('product.edit', ['product'=>$product->id])}}" class="btn btn-warning">Edit</a>
               {!! Form::open([

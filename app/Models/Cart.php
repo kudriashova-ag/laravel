@@ -20,5 +20,30 @@ class Cart
         ];
         Session::put("cart.$product->id", $prod);
     }
+
+    self::totalSum();
    }
+
+   public static function delete(Product $product){
+    Session::forget("cart.$product->id");
+    self::totalSum();
+   }
+
+   private static function totalSum(){
+        $sum = 0;
+        foreach(Session::get('cart') as $product){
+            $sum+= $product['price'] * $product['amount'];
+        }
+        Session::put('totalSum', $sum);
+   }
+
+
+
+    public static function changeAmount(int $productId, int $amount)
+    {
+        Session::put("cart.$productId.amount", $amount);
+        self::totalSum();
+    }
+
+
 }

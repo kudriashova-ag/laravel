@@ -12,4 +12,15 @@ class CartController extends Controller
         Cart::add($product);
         return view('shop.cart');
     }
+
+    function delete(Product $product)
+    {
+        Cart::delete($product);
+        return view('shop.cart');
+    }
+
+    function changeAmount(Request $request) {
+        Cart::changeAmount($request->productId, $request->amount);
+        return view('shop.cart');
+    }
 }

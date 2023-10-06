@@ -25,10 +25,16 @@ Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('contacts', [MainController::class, 'contacts']);
 Route::post('contacts', [MainController::class, 'sendMail']);
 Route::get('category/{category:slug}', [ShopController::class, 'category']);
+Route::get('search', [MainController::class, 'search'])->name('search');
+
+
+
 Auth::routes();
 
 
 Route::post('cart/add/{product}', [CartController::class, 'store']);
+Route::delete('cart/delete/{product}', [CartController::class, 'delete']);
+Route::put('cart/change-amount', [CartController::class, 'changeAmount']);
 
 
 

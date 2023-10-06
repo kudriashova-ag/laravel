@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,7 +27,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all()->pluck('name', 'id');
-        return view('admin.product.create', compact('categories'));
+        $tags = Tag::all()->pluck('name', 'id');
+        return view('admin.product.create', compact('categories', 'tags'));
     }
 
     /**
@@ -41,7 +43,11 @@ class ProductController extends Controller
             // 'image' => 'image'
         ]);
 
+        //dd($request->all());
+
         $product = Product::create($request->all());
+
+        $product->tags()->sync($request->tags);
 
         // загрузить изображение, если есть
         // if ($request->image) {

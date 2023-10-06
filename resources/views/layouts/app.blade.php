@@ -83,6 +83,10 @@
                             </li>
                         @endguest
                     </ul>
+
+                    <form action="{{route('search')}}">
+                        <input type="text" name="s">
+                    </form>
                 </div>
             </div>
         </nav>

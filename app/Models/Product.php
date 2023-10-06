@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $with = ['category'];
+    protected $with = ['category', 'tags'];
 
     protected $fillable = ['name', 'description', 'price', 'category_id', 'image'];
 
@@ -28,6 +28,10 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
+
     protected function image(): Attribute
     {
         return Attribute::make(
@@ -35,5 +39,10 @@ class Product extends Model
         );
     }
 
-   
+    protected function categoryName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => $attributes['category_id'] ? $this->category->name : '-',
+        );
+    }
 }

@@ -13,6 +13,14 @@
   {!! Form::select('category_id', $categories, null, ['class'=>'form-control']) !!}
 </div>
 
+
+<div class="form-group mt-3">
+  {!! Form::label('tags', 'Product Tags:') !!}
+  {!! Form::select('tags[]', $tags, null, ['class'=>'form-control', 'multiple'=>'multiple']) !!}
+</div>
+
+
+
 <div class="form-group mt-3">
   {!! Form::label('image', 'Product Image:') !!}
   {!! Form::file('image', ['class'=>'form-control']) !!}
